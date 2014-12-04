@@ -8,11 +8,10 @@ RSpec.describe TeamsController, :type => :controller do
       expect(assigns(:teams)).to eq([team])
     end
 
-    it "only shows active teams" do
-      team = Team.create
-      team.disband
+    it "assigns @mutants" do
+      mutant = Mutant.create(name: "mutant")
       get :index
-      expect(assigns(:teams)).to eq([])
+      expect(assigns(:mutants)).to eq([mutant])
     end
 
     it "renders the #index view" do

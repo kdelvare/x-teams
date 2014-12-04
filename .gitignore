@@ -18,4 +18,5 @@
 /vendor/bundle
 
 *.swp
+*.kate-swp
 .kate*
