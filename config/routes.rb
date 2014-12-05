@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'teams#index'
 
-  resource :teams
+  resources :mutants
+  resources :teams
 end

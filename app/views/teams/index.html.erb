@@ -1,7 +1,12 @@
 <h2>Teams in mission</h2>
 <%- @teams.each do |team| -%>
-Team
-<%- end %>
+<%- team.mutants.each do |mutant| -%>
+<%= mutant.name %>
+<%- end -%>
+<%- end -%>
 
 <h2>Send new team</h2>
 <h3>Free mutants</h3>
+<%- @mutants.each do |mutant| -%>
+<%= mutant.name %>
+<%- end -%>
