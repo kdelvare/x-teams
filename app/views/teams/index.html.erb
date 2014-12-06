@@ -7,6 +7,10 @@
 
 <h2>Send new team</h2>
 <h3>Free mutants</h3>
-<%- @mutants.each do |mutant| -%>
-<%= mutant.name %>
-<%- end -%>
+<%= simple_form_for @team do |f| %>
+<%= f.input :mutant do %>
+<%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, { :prompt => "Please select"}, { :multiple => true, :size => 5, :class=>"image-picker show-html" } %>
+<% end %>
+<%= f.input :mission %>
+<%= f.button :submit, "Send team" %>
+<% end %>

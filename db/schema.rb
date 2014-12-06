@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205073742) do
+ActiveRecord::Schema.define(version: 20141206050509) do
 
   create_table "mutants", force: true do |t|
     t.string   "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141205073742) do
     t.datetime "disbanded_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "mission"
   end
 
 end
