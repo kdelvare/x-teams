@@ -19,4 +19,15 @@ RSpec.describe TeamsController, :type => :controller do
       expect(response).to render_template("index")
     end
   end
+
+  describe "POST #create" do
+    it "create a team" do
+      expect{ post :create, team: { mission: "mission" } }.to change(Team, :count).by(1)
+    end
+
+    it "redirects to index" do
+      post :create, team: { mission: "mission" }
+      expect(response).to redirect_to(teams_path)
+    end
+  end
 end
