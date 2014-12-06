@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206050509) do
+ActiveRecord::Schema.define(version: 20141206055045) do
 
   create_table "mutants", force: true do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20141206050509) do
     t.datetime "updated_at"
     t.text     "image_url"
   end
+
+  add_index "mutants", ["name"], name: "index_mutants_on_name", unique: true
 
   create_table "mutants_teams", id: false, force: true do |t|
     t.integer "mutant_id", null: false
