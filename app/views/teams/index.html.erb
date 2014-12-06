@@ -1,16 +1,30 @@
-<h2>Teams in mission</h2>
-<%- @teams.each do |team| -%>
-<%- team.mutants.each do |mutant| -%>
-<%= mutant.name %>
-<%- end -%>
-<%- end -%>
+<%- if @teams.present? %>
+  <h2>Teams in mission</h2>
+  <%- @teams.each do |team| %>
+  <p><em>Mission: <%= team.mission %></em></p>
+    <ul class="thumbnails image_picker_selector">
+    <%- team.mutants.each do |mutant| %>
+      <li><div class="thumbnail">
+        <%= image_tag mutant.image_url %>
+        <p><%= mutant.name %></p>
+      </div></li>
+    <%- end %>
+    </ul>
+  <%- end %>
+<%- end %>
 
-<h2>Send new team</h2>
-<h3>Free mutants</h3>
-<%= simple_form_for @team do |f| %>
-<%= f.input :mutant do %>
-<%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, { :prompt => "Please select"}, { :multiple => true, :size => 5, :class=>"image-picker show-html" } %>
-<% end %>
-<%= f.input :mission %>
-<%= f.button :submit, "Send team" %>
-<% end %>
+<%- if @mutants.present? %>
+  <h2>Send new team</h2>
+  <%= simple_form_for @team do |f| %>
+    <%= f.input :mutant do %>
+      <%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, { :prompt => "Please select"}, { :multiple => true, :size => 5, :class=>"image-picker show-html" } %>
+    <%- end %>
+    <%= f.input :mission %>
+    <%= f.button :submit, "Send team" %>
+  <%- end %>
+<%- end %>
+
+<%- if !Mutant.any? %>
+  <p>You have not hired mutants yet!</p>
+<%- end %>
+<%= link_to "Hire new mutant", new_mutant_path %>
