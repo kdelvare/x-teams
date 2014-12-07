@@ -22,11 +22,11 @@ RSpec.describe TeamsController, :type => :controller do
 
   describe "POST #create" do
     it "create a team" do
-      expect{ post :create, team: { mission: "mission" } }.to change(Team, :count).by(1)
+      expect{ post :create, team: { created_at: Time.now } }.to change(Team, :count).by(1)
     end
 
     it "redirects to index" do
-      post :create, team: { mission: "mission" }
+      post :create, team: { created_at: Time.now }
       expect(response).to redirect_to(teams_path)
     end
   end

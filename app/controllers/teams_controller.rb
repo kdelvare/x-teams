@@ -23,6 +23,6 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:mission, mutant_ids: [])
+    params.require(:team).permit(mutant_ids: [])
   end
 end

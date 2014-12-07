@@ -1,5 +1,6 @@
 class Team < ActiveRecord::Base
   has_and_belongs_to_many :mutants
+  has_many :tasks
 
   def disband
     update_attribute(:disbanded_at, Time.now)

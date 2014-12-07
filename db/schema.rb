@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206055045) do
+ActiveRecord::Schema.define(version: 20141207175339) do
 
   create_table "mutants", force: true do |t|
     t.string   "name"
@@ -27,11 +27,19 @@ ActiveRecord::Schema.define(version: 20141206055045) do
     t.integer "team_id",   null: false
   end
 
+  create_table "tasks", force: true do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "team_id"
+  end
+
+  add_index "tasks", ["team_id"], name: "index_tasks_on_team_id"
+
   create_table "teams", force: true do |t|
     t.datetime "disbanded_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "mission"
   end
 
 end

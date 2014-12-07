@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Team, :type => :model do
   it { should have_and_belong_to_many(:mutants) }
+  it { should have_many(:tasks) }
 
   describe "#disband" do
     it "should set disbanded_at" do
