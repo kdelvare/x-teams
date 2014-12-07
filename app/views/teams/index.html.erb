@@ -1,30 +1,60 @@
-<%- if @teams.present? %>
-  <h2>Teams in mission</h2>
-  <%- @teams.each do |team| %>
-  <p><em>Mission: <%= team.mission %></em></p>
-    <ul class="thumbnails image_picker_selector">
-    <%- team.mutants.each do |mutant| %>
-      <li><div class="thumbnail">
-        <%= image_tag mutant.image_url %>
-        <p><%= mutant.name %></p>
-      </div></li>
-    <%- end %>
-    </ul>
-  <%- end %>
+<%- if !Mutant.any? %>
+  <p>You have not hired mutants yet!</p>
+  <%= link_to "Hire new mutant", new_mutant_path %>
 <%- end %>
 
 <%- if @mutants.present? %>
   <h2>Send new team</h2>
   <%= simple_form_for @team do |f| %>
-    <%= f.input :mutant do %>
-      <%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, { :prompt => "Please select"}, { :multiple => true, :size => 5, :class=>"image-picker show-html" } %>
-    <%- end %>
     <%= f.input :mission %>
+    <%= f.input :mutant, label: "Pick mutants" do %>
+      <%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, {}, { :multiple => true, :class=>"image-picker show-html" } %>
+    <%- end %>
     <%= f.button :submit, "Send team" %>
   <%- end %>
 <%- end %>
 
-<%- if !Mutant.any? %>
-  <p>You have not hired mutants yet!</p>
+<%- if @teams.present? %>
+  <h2>Teams in mission</h2>
+  <%- @teams.each do |team| %>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <%= button_to team, { method: :put, class: "btn btn-default btn-xs" } do %>
+          <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Successful return
+        <%- end %>
+        Mission: <%= team.mission %>
+      </div>
+      <div class="panel-body">
+        <ul class="thumbnails image_picker_selector">
+        <%- team.mutants.each do |mutant| %>
+          <li><div class="thumbnail">
+            <%= image_tag mutant.image_url %>
+            <p><%= mutant.name %></p>
+          </div></li>
+        <%- end %>
+        </ul>
+      </div>
+    </div>
+  <%- end %>
 <%- end %>
-<%= link_to "Hire new mutant", new_mutant_path %>
+
+<%- if @disbanded.present? %>
+  <h2>Missions accomplished</h2>
+  <%- @disbanded.each do |team| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Mission: <%= team.mission %>
+      </div>
+      <div class="panel-body">
+        <ul class="thumbnails image_picker_selector">
+        <%- team.mutants.each do |mutant| %>
+          <li><div class="thumbnail">
+            <%= image_tag mutant.image_url %>
+            <p><%= mutant.name %></p>
+          </div></li>
+        <%- end %>
+        </ul>
+      </div>
+    </div>
+  <%- end %>
+<%- end %>

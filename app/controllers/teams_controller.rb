@@ -1,8 +1,9 @@
 class TeamsController < ApplicationController
   def index
-    @teams = Team.active
     @mutants = Mutant.free
     @team = Team.new
+    @teams = Team.active
+    @disbanded = Team.disbanded
   end
 
   def create
@@ -12,6 +13,12 @@ class TeamsController < ApplicationController
     else
       render :index
     end
+  end
+
+  def update
+    team = Team.find(params[:id])
+    team.disband
+    redirect_to teams_url, notice: "Mission successful!"
   end
 
   private

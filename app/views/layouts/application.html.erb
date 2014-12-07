@@ -2,16 +2,27 @@
 <html>
 <head>
   <title>XTeams</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-  <% end -%>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header navbar-right">Professor Xavier<br/>Teaming tool</div>
+    <ul class="nav navbar-nav">
+      <li class="<%= 'active' if params[:controller] == 'teams' %>"><%= link_to "Teams", teams_path %></li>
+      <li class="<%= 'active' if params[:controller] == 'mutants' %>"><%= link_to "Mutants", mutants_path %></li>
+    </ul>
+  </div>
+</nav>
 
-<%= yield %>
+<div class="container">
 
+  <%= flash_messages %>
+
+  <%= yield %>
+
+</div>
 </body>
 </html>

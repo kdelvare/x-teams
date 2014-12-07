@@ -6,4 +6,5 @@ class Team < ActiveRecord::Base
   end
 
   scope :active, -> { where(disbanded_at: nil) }
+  scope :disbanded, -> { where.not(disbanded_at: nil) }
 end
