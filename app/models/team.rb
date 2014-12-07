@@ -5,6 +5,14 @@ class Team < ActiveRecord::Base
     update_attribute(:disbanded_at, Time.now)
   end
 
-  scope :active, -> { where(disbanded_at: nil) }
-  scope :disbanded, -> { where.not(disbanded_at: nil) }
+  def active?
+    disbanded_at.nil?
+  end
+
+  def disbanded?
+    !active?
+  end
+
+  scope :active, -> { where(disbanded_at: nil).order(:created_at) }
+  scope :disbanded, -> { where.not(disbanded_at: nil).order(:created_at) }
 end
