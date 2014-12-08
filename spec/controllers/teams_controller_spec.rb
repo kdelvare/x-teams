@@ -8,15 +8,36 @@ RSpec.describe TeamsController, :type => :controller do
       expect(assigns(:teams)).to eq([team])
     end
 
-    it "assigns @mutants" do
-      mutant = Mutant.create(name: "mutant")
-      get :index
-      expect(assigns(:mutants)).to eq([mutant])
-    end
-
     it "renders the #index view" do
       get :index
       expect(response).to render_template("index")
+    end
+  end
+
+  describe "GET #disbanded" do
+    it "assigns @teams" do
+      team = Team.create
+      team.disband
+      get :index
+      expect(assigns(:teams)).to eq([team])
+    end
+
+    it "renders the #disbanded view" do
+      get :disbanded
+      expect(response).to render_template("disbanded")
+    end
+  end
+
+  describe "GET #new" do
+    it "assigns @mutants" do
+      mutant = Mutant.create(name: "mutant")
+      get :new
+      expect(assigns(:mutants)).to eq([mutant])
+    end
+
+    it "renders the #new view" do
+      get :new
+      expect(response).to render_template("new")
     end
   end
 

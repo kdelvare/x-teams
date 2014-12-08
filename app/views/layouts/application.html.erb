@@ -11,7 +11,9 @@
   <div class="container">
     <div class="navbar-header navbar-right">Professor Xavier<br/>Teaming tool</div>
     <ul class="nav navbar-nav">
-      <li class="<%= 'active' if params[:controller] == 'teams' %>"><%= link_to "Teams", teams_path %></li>
+      <li class="<%= 'active' if params[:action] == 'index' %>"><%= link_to "Active teams", teams_path %></li>
+      <li class="<%= 'active' if params[:action] == 'new' %>"><%= link_to "Form new team", new_team_path %></li>
+      <li class="<%= 'active' if params[:action] == 'disbanded' %>"><%= link_to "Accomplished tasks", disbanded_teams_path %></li>
     </ul>
   </div>
 </nav>

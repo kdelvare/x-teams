@@ -1,5 +1,5 @@
 <%- if @teams.present? %>
-  <h2>Teams in mission</h2>
+  <h2>Missions accomplished</h2>
   <%- @teams.each do |team| %>
     <%= render partial: 'team', locals: {team: team} %>
   <%- end %>

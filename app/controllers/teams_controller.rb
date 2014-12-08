@@ -1,9 +1,15 @@
 class TeamsController < ApplicationController
   def index
+    @teams = Team.active
+  end
+
+  def disbanded
+    @teams = Team.disbanded
+  end
+
+  def new
     @mutants = Mutant.free
     @team = Team.new
-    @teams = Team.active
-    @disbanded = Team.disbanded
   end
 
   def create

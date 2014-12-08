@@ -1,0 +1,14 @@
+<%- if !Mutant.any? %>
+  <p>You have not hired mutants yet!</p>
+  <%= link_to "Hire new mutant", new_mutant_path %>
+<%- end %>
+
+<%- if @mutants.present? %>
+  <h2>Send new team</h2>
+  <%= simple_form_for @team, defaults: { wrapper_html: { class: "form-group" }, input_html: { class: "form-control" } } do |f| %>
+    <%= f.input :mutant, label: "Pick mutants" do %>
+      <%= f.select :mutant_ids, @mutants.map { |f| [f.name, f.id, { 'data-img-src' => f.image_url} ] }, {}, { :multiple => true, :class=>"image-picker show-html" } %>
+    <%- end %>
+    <%= f.button :submit, "Send team", class: "btn-primary" %>
+  <%- end %>
+<%- end %>
