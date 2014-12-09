@@ -18,7 +18,7 @@ RSpec.describe TeamsController, :type => :controller do
     it "assigns @teams" do
       team = Team.create
       team.disband
-      get :index
+      get :disbanded
       expect(assigns(:teams)).to eq([team])
     end
 

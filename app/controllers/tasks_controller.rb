@@ -8,6 +8,11 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    Task.destroy(params[:id])
+    redirect_to teams_url, notice: "Task deleted"
+  end
+
   private
   def task_params
     params.require(:task).permit(:team_id, :description)

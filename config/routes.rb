@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :teams, only: [:index, :show, :new, :create, :update] do
     get :disbanded, on: :collection
   end
-  resources :tasks, only: [:create]
+  resources :tasks, only: [:show, :create, :destroy]
 end

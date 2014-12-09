@@ -11,4 +11,16 @@ RSpec.describe TasksController, :type => :controller do
       expect(response).to redirect_to(teams_path)
     end
   end
+
+  describe "DELETE #destroy" do
+    it "deletes the task" do
+      task = Task.create
+      expect{ delete :destroy, id: task.id }.to change(Task, :count).by(-1)
+    end
+
+    it "redirects to teams" do
+      delete :destroy, id: Task.create.id
+      expect(response).to redirect_to(teams_path)
+    end
+  end
 end
