@@ -14,6 +14,6 @@ class Team < ActiveRecord::Base
     !active?
   end
 
-  scope :active, -> { where(disbanded_at: nil).order(:created_at) }
-  scope :disbanded, -> { where.not(disbanded_at: nil).order(:created_at) }
+  scope :active, -> { where(disbanded_at: nil).order(created_at: :desc) }
+  scope :disbanded, -> { where.not(disbanded_at: nil).order(created_at: :desc) }
 end

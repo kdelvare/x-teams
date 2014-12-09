@@ -2,11 +2,11 @@
   <div class="panel-heading">
     <%- if team.active? %>
       <%= button_to team, { method: :put, class: "btn btn-default btn-xs" } do %>
-        <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Successful return
+        <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Disband
       <%- end %>
-    <%- end %>
-    <%- if team.disbanded? %>
-      (<%= distance_of_time_in_words(team.created_at, team.disbanded_at) %>)
+      Team formed <%= distance_of_time_in_words_to_now(team.created_at) %> ago
+    <%- else %>
+      Team lasted <%= distance_of_time_in_words(team.created_at, team.disbanded_at) %>
     <%- end %>
   </div>
   <div class="panel-body">
@@ -18,5 +18,19 @@
       </div></li>
     <%- end %>
     </ul>
+  </div>
+  <div class="panel-footer">
+    <ul>
+      <%- team.tasks.each do |task| %>
+        <li><%= task.description %></li>
+      <%- end %>
+    </ul>
+    <%- if team.active? %>
+      <%= simple_form_for @task, html: { class: "form-inline" }, defaults: { wrapper_html: { class: "form-group" }, input_html: { class: "form-control" } } do |f| %>
+        <%= f.hidden_field :team_id, value: team.id %>
+        <%= f.input :description, label: false %>
+        <%= f.button :submit, "Assign task", class: "btn-primary" %>
+      <%- end %>
+    <%- end %>
   </div>
 </div>

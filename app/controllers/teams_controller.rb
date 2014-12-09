@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   def index
     @teams = Team.active
+    @task = Task.new
   end
 
   def disbanded
@@ -15,7 +16,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     if @team.save
-      redirect_to teams_url, notice: "Team sent!"
+      redirect_to teams_url, notice: "Team formed!"
     else
       render :index
     end
@@ -24,7 +25,7 @@ class TeamsController < ApplicationController
   def update
     team = Team.find(params[:id])
     team.disband
-    redirect_to teams_url, notice: "Mission successful!"
+    redirect_to teams_url, notice: "Team done!"
   end
 
   private

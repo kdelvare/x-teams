@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'teams#index'
 
-  resources :mutants
-  resources :teams do
+  resources :teams, only: [:index, :show, :new, :create, :update] do
     get :disbanded, on: :collection
   end
+  resources :tasks, only: [:create]
 end
