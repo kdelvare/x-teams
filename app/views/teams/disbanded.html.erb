@@ -3,4 +3,6 @@
   <%- @teams.each do |team| %>
     <%= render partial: 'team', locals: {team: team} %>
   <%- end %>
+<%- else %>
+  <p>No disbanded teams.</p>
 <%- end %>
